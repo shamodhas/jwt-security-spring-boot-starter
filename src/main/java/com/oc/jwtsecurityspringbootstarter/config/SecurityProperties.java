@@ -10,6 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "auth.security")
 public class SecurityProperties {
+
     private final boolean enabled;
     private final String jwtAccessSecret;
     private final String jwtRefreshSecret;
@@ -19,19 +20,9 @@ public class SecurityProperties {
     private final ApiPaths api;
     private final CorsConfig cors;
 
-    @Getter
-    @RequiredArgsConstructor
-    public static class ApiPaths {
-        private final String login;
-        private final String register;
-        private final String refresh;
+    public record ApiPaths(String login, String register, String refresh) {
     }
 
-    @Getter
-    @RequiredArgsConstructor
-    public static class CorsConfig {
-        private final List<String> allowedOrigins;
-        private final List<String> allowedMethods;
-        private final List<String> allowedHeaders;
+    public record CorsConfig(List<String> allowedOrigins, List<String> allowedMethods, List<String> allowedHeaders) {
     }
 }

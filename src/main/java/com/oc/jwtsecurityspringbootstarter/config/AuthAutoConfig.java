@@ -48,9 +48,9 @@ public class AuthAutoConfig {
     @ConditionalOnMissingBean
     public CorsConfigurationSource corsConfigurationSource(SecurityProperties properties) {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(properties.getCors().getAllowedOrigins());
-        configuration.setAllowedMethods(properties.getCors().getAllowedMethods());
-        configuration.setAllowedHeaders(properties.getCors().getAllowedHeaders());
+        configuration.setAllowedOrigins(properties.getCors().allowedOrigins());
+        configuration.setAllowedMethods(properties.getCors().allowedMethods());
+        configuration.setAllowedHeaders(properties.getCors().allowedHeaders());
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -65,9 +65,9 @@ public class AuthAutoConfig {
             ApplicationContext applicationContext) throws Exception {
 
         List<String> publicPaths = new ArrayList<>(properties.getPublicEndpoints());
-        publicPaths.add(properties.getApi().getLogin());
-        publicPaths.add(properties.getApi().getRegister());
-        publicPaths.add(properties.getApi().getRefresh());
+        publicPaths.add(properties.getApi().login());
+        publicPaths.add(properties.getApi().register());
+        publicPaths.add(properties.getApi().refresh());
 
         try {
             RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping", RequestMappingHandlerMapping.class);
