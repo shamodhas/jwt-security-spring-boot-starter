@@ -1,4 +1,4 @@
-package com.oc.jwtsecurityspringbootstarter.annotation;
+package com.shamodha.jwtsecurityspringbootstarter.annotation;
 
 import java.lang.annotation.*;
 

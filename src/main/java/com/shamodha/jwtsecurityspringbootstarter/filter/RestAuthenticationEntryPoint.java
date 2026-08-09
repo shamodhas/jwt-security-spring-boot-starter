@@ -1,4 +1,4 @@
-package com.oc.jwtsecurityspringbootstarter.filter;
+package com.shamodha.jwtsecurityspringbootstarter.filter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

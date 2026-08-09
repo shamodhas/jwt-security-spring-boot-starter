@@ -1,8 +1,8 @@
-package com.oc.jwtsecurityspringbootstarter.core;
+package com.shamodha.jwtsecurityspringbootstarter.core;
 
-import com.oc.jwtsecurityspringbootstarter.config.SecurityProperties;
-import com.oc.jwtsecurityspringbootstarter.model.TokenPair;
-import com.oc.jwtsecurityspringbootstarter.model.UserContext;
+import com.shamodha.jwtsecurityspringbootstarter.config.SecurityProperties;
+import com.shamodha.jwtsecurityspringbootstarter.model.TokenPair;
+import com.shamodha.jwtsecurityspringbootstarter.model.UserContext;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

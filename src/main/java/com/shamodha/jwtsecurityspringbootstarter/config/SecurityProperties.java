@@ -1,4 +1,4 @@
-package com.oc.jwtsecurityspringbootstarter.config;
+package com.shamodha.jwtsecurityspringbootstarter.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.DefaultValue;

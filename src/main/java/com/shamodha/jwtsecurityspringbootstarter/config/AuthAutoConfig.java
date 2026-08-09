@@ -1,9 +1,9 @@
-package com.oc.jwtsecurityspringbootstarter.config;
+package com.shamodha.jwtsecurityspringbootstarter.config;
 
-import com.oc.jwtsecurityspringbootstarter.annotation.PublicApi;
-import com.oc.jwtsecurityspringbootstarter.core.JwtEngine;
-import com.oc.jwtsecurityspringbootstarter.filter.JwtAuthFilter;
-import com.oc.jwtsecurityspringbootstarter.filter.RestAuthenticationEntryPoint;
+import com.shamodha.jwtsecurityspringbootstarter.annotation.PublicApi;
+import com.shamodha.jwtsecurityspringbootstarter.core.JwtEngine;
+import com.shamodha.jwtsecurityspringbootstarter.filter.JwtAuthFilter;
+import com.shamodha.jwtsecurityspringbootstarter.filter.RestAuthenticationEntryPoint;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

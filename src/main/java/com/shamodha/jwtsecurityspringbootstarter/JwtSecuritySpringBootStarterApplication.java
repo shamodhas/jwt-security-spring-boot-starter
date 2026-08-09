@@ -1,4 +1,4 @@
-package com.oc.jwtsecurityspringbootstarter;
+package com.shamodha.jwtsecurityspringbootstarter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

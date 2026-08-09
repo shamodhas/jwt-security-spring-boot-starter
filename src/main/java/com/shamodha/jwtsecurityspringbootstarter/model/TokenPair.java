@@ -1,4 +1,4 @@
-package com.oc.jwtsecurityspringbootstarter.model;
+package com.shamodha.jwtsecurityspringbootstarter.model;
 
 public record TokenPair(
         String accessToken,

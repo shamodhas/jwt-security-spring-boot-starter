@@ -1,7 +1,7 @@
-package com.oc.jwtsecurityspringbootstarter.filter;
+package com.shamodha.jwtsecurityspringbootstarter.filter;
 
-import com.oc.jwtsecurityspringbootstarter.core.JwtEngine;
-import com.oc.jwtsecurityspringbootstarter.model.UserContext;
+import com.shamodha.jwtsecurityspringbootstarter.core.JwtEngine;
+import com.shamodha.jwtsecurityspringbootstarter.model.UserContext;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
