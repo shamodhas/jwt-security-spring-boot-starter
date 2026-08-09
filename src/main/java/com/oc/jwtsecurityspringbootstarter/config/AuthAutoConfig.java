@@ -48,11 +48,14 @@ public class AuthAutoConfig {
     @ConditionalOnMissingBean
     public CorsConfigurationSource corsConfigurationSource(SecurityProperties properties) {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(properties.getCors().allowedOrigins());
-        configuration.setAllowedMethods(properties.getCors().allowedMethods());
-        configuration.setAllowedHeaders(properties.getCors().allowedHeaders());
+
+        configuration.setAllowedOrigins(properties.cors().allowedOrigins());
+        configuration.setAllowedMethods(properties.cors().allowedMethods());
+        configuration.setAllowedHeaders(properties.cors().allowedHeaders());
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 
@@ -64,10 +67,10 @@ public class AuthAutoConfig {
             JwtAuthFilter jwtFilter,
             ApplicationContext applicationContext) throws Exception {
 
-        List<String> publicPaths = new ArrayList<>(properties.getPublicEndpoints());
-        publicPaths.add(properties.getApi().login());
-        publicPaths.add(properties.getApi().register());
-        publicPaths.add(properties.getApi().refresh());
+        List<String> publicPaths = new ArrayList<>(properties.publicEndpoints());
+        publicPaths.add(properties.api().login());
+        publicPaths.add(properties.api().register());
+        publicPaths.add(properties.api().refresh());
 
         try {
             RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping", RequestMappingHandlerMapping.class);
