@@ -1,8 +1,8 @@
 server:
   port: 8080
 
-oc:
-  guard:
+auth:
+  security:
     enabled: true
     jwt-access-secret: "YOUR_SECURE_BASE64_OR_HS512_SECRET_KEY_MIN_512_BITS_LONG"
     jwt-refresh-secret: "YOUR_SECURE_BASE64_OR_HS512_SECRET_KEY_MIN_512_BITS_LONG"
