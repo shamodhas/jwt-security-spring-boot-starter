@@ -7,44 +7,39 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
+
     private final JwtEngine jwtEngine;
-    private static final String BEARER = "Bearer ";
 
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        String header = request.getHeader("Authorization");
 
-        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            if (jwtEngine.isAccessTokenValid(token)) {
+                UserContext context = jwtEngine.extractContext(token);
+                List<SimpleGrantedAuthority> authorities = context.roles().stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .collect(Collectors.toList());
 
-        if (authHeader != null && authHeader.startsWith(BEARER)) {
-            final String jwt = authHeader.substring(7);
-            try {
-                if (SecurityContextHolder.getContext().getAuthentication() == null && jwtEngine.isAccessTokenValid(jwt)) {
-                    UserContext context = jwtEngine.extractContext(jwt);
-                    var authorities = context.roles().stream()
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))
-                            .toList();
-
-                    var authToken = new UsernamePasswordAuthenticationToken(context, null, authorities);
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
-                }
-            } catch (Exception e) {
-                SecurityContextHolder.clearContext();
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                        context, null, authorities
+                );
+                SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
-
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 }

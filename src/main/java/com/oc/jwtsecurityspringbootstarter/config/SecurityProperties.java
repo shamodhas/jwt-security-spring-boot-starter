@@ -1,39 +1,37 @@
 package com.oc.jwtsecurityspringbootstarter.config;
 
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
+@RequiredArgsConstructor
 @ConfigurationProperties(prefix = "auth.security")
 public class SecurityProperties {
-
-    private boolean enabled = true;
-    private String jwtAccessSecret;
-    private String jwtRefreshSecret;
-    private long jwtAccessExpiration = 86400000;
-    private long jwtRefreshExpiration = 604800000;
-    private List<String> publicEndpoints = new ArrayList<>();
-    private ApiPaths api = new ApiPaths();
-    private CorsConfig cors = new CorsConfig();
+    private final boolean enabled;
+    private final String jwtAccessSecret;
+    private final String jwtRefreshSecret;
+    private final long jwtAccessExpiration;
+    private final long jwtRefreshExpiration;
+    private final List<String> publicEndpoints;
+    private final ApiPaths api;
+    private final CorsConfig cors;
 
     @Getter
-    @Setter
+    @RequiredArgsConstructor
     public static class ApiPaths {
-        private String login = "/api/v1/auth/login";
-        private String register = "/api/v1/auth/register";
-        private String refresh = "/api/v1/auth/refresh";
+        private final String login;
+        private final String register;
+        private final String refresh;
     }
 
     @Getter
-    @Setter
+    @RequiredArgsConstructor
     public static class CorsConfig {
-        private List<String> allowedOrigins = List.of("*");
-        private List<String> allowedMethods = List.of("GET", "POST", "PUT", "DELETE", "OPTIONS");
-        private List<String> allowedHeaders = List.of("*");
+        private final List<String> allowedOrigins;
+        private final List<String> allowedMethods;
+        private final List<String> allowedHeaders;
     }
 }

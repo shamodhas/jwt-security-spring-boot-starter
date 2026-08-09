@@ -6,6 +6,7 @@ import com.oc.jwtsecurityspringbootstarter.model.UserContext;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -14,13 +15,10 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class JwtEngine {
 
     private final SecurityProperties properties;
-
-    public JwtEngine(SecurityProperties properties) {
-        this.properties = properties;
-    }
 
     private SecretKey getAccessKey() {
         return Keys.hmacShaKeyFor(properties.getJwtAccessSecret().getBytes(StandardCharsets.UTF_8));
@@ -64,6 +62,7 @@ public class JwtEngine {
 
     public UserContext extractContext(String token) {
         Claims claims = Jwts.parser().verifyWith(getAccessKey()).build().parseSignedClaims(token).getPayload();
+
         String userId = claims.getSubject();
         String username = claims.get("username", String.class);
         String email = claims.get("email", String.class);
