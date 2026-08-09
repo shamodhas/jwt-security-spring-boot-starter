@@ -1,5 +1,9 @@
 package com.oc.jwtsecurityspringbootstarter.config;
 
+import com.oc.jwtsecurityspringbootstarter.annotation.PublicApi;
+import com.oc.jwtsecurityspringbootstarter.core.JwtEngine;
+import com.oc.jwtsecurityspringbootstarter.filter.JwtAuthFilter;
+import com.oc.jwtsecurityspringbootstarter.filter.RestAuthenticationEntryPoint;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -74,7 +78,8 @@ public class AuthAutoConfig {
                     }
                 }
             });
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource(properties)))
