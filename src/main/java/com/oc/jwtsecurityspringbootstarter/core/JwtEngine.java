@@ -21,11 +21,11 @@ public class JwtEngine {
     private final SecurityProperties properties;
 
     private SecretKey getAccessKey() {
-        return Keys.hmacShaKeyFor(properties.getJwtAccessSecret().getBytes(StandardCharsets.UTF_8));
+        return Keys.hmacShaKeyFor(properties.jwtAccessSecret().getBytes(StandardCharsets.UTF_8));
     }
 
     private SecretKey getRefreshKey() {
-        return Keys.hmacShaKeyFor(properties.getJwtRefreshSecret().getBytes(StandardCharsets.UTF_8));
+        return Keys.hmacShaKeyFor(properties.jwtRefreshSecret().getBytes(StandardCharsets.UTF_8));
     }
 
     public TokenPair generateTokenPair(UserContext context) {
@@ -37,18 +37,18 @@ public class JwtEngine {
                 .claim("email", context.email())
                 .claim("roles", context.roles())
                 .issuedAt(new Date(now))
-                .expiration(new Date(now + properties.getJwtAccessExpiration()))
+                .expiration(new Date(now + properties.jwtAccessExpiration()))
                 .signWith(getAccessKey())
                 .compact();
 
         String refreshToken = Jwts.builder()
                 .subject(context.userId())
                 .issuedAt(new Date(now))
-                .expiration(new Date(now + properties.getJwtRefreshExpiration()))
+                .expiration(new Date(now + properties.jwtRefreshExpiration()))
                 .signWith(getRefreshKey())
                 .compact();
 
-        return new TokenPair(accessToken, refreshToken, properties.getJwtAccessExpiration());
+        return new TokenPair(accessToken, refreshToken, properties.jwtAccessExpiration());
     }
 
     public boolean isAccessTokenValid(String token) {
