@@ -87,7 +87,7 @@ public class AuthAutoConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(publicPaths.toArray(new String[0])).permitAll()
-                        .anyRequest().authenticated() // Secure by default
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

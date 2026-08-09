@@ -15,6 +15,7 @@ import java.util.List;
 
 @Component
 public class JwtEngine {
+
     private final SecurityProperties properties;
 
     public JwtEngine(SecurityProperties properties) {

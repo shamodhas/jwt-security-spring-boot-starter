@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @ConfigurationProperties(prefix = "auth.security")
 public class SecurityProperties {
+
     private boolean enabled = true;
     private String jwtAccessSecret;
     private String jwtRefreshSecret;
