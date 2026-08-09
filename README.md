@@ -73,14 +73,14 @@ The library is published on **Maven Central**. Just add the dependency — no lo
 <dependency>
     <groupId>io.github.shamodhas</groupId>
     <artifactId>jwt-security-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
 **Gradle:**
 
 ```groovy
-implementation 'io.github.shamodhas:jwt-security-spring-boot-starter:0.0.1'
+implementation 'io.github.shamodhas:jwt-security-spring-boot-starter:0.0.2'
 ```
 
 > Check [Maven Central](https://central.sonatype.com/artifact/io.github.shamodhas/jwt-security-spring-boot-starter) for the latest available version.
